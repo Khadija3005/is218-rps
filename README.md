@@ -2,39 +2,50 @@
 
 This is a **self-paced, guided first lab**. Make one round of Rock, Paper, Scissors work, then show why you trust the result. You will agree on a short spec, guide an AI coding agent, use automatic checks, and review its work.
 
-Use **ChatGPT desktop in Codex mode**, your **class terminal**, and a **browser**. Codex is the coding agent inside the app: it can read your project, edit files, and run checks. **VS Code is optional.** No API key, separate Codex CLI, or classroom demonstration is required.
+Start with **your GitHub copy → SSH clone → local AI project**. The steps below use **ChatGPT desktop in Codex mode**, terminal Git, and a browser. **VS Code is optional.** This path needs no API key, separate Codex CLI, or classroom demonstration.
 
 **Try → Decide → Build → Check → Keep.** If you stop, return to this README at the last checkpoint you completed. [Visual overview](https://kaw393939.github.io/218_spec/).
 
 ## 1. Try the starter
 
-Use your existing GitHub SSH and Python setup. Mac students use Terminal; Windows students use the class Ubuntu/WSL terminal. Check `python3 --version`: expect **Python 3.12.x**. If different, use [Python help](https://kaw393939.github.io/218_spec/setup.html#python-version) before creating the environment.
+**First, get the repo into your AI project.** Use your existing class SSH setup in macOS Terminal or Ubuntu/WSL on Windows. The agent will help check Python and prepare the app after you open the folder.
 
 On [the starter](https://github.com/kaw393939/is218-rps-starter), choose **Use this template → Create a new repository**. Use your account, name it `my-rps`, choose **Public**, leave **Include all branches** off, and leave the optional Copilot prompt blank. Already made your copy? Open it and skip creating another.
 
-In your projects folder, replace `YOUR-USERNAME` below. If you chose another repository name, replace `my-rps` too. **Run one command at a time; stop if one fails.** After `cd`, `pwd` must end in your repository's folder name before you create `.venv`.
+In your projects folder, replace `YOUR-USERNAME` below. If you chose another repository name, replace `my-rps` too. **Run one command at a time; stop if one fails.** `pwd` must end in your repository's folder name, and both lines from `git remote -v` must identify **your copy** using `git@github.com:`.
 
 ```sh
 git clone git@github.com:YOUR-USERNAME/my-rps.git
 cd my-rps
 pwd
 git remote -v
-python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
+```
+
+In **ChatGPT desktop**, select **Codex** from the ChatGPT dropdown. Open this cloned folder as a **local project** with **⌘O on Mac / Ctrl+O on Windows**. Start a chat in that project, choose **Work in → This computer**, and leave **Worktree** off. On Windows, first follow the [one-time WSL app setup](https://kaw393939.github.io/218_spec/setup.html#windows-wsl).
+
+Ask:
+
+> Read README.md, AGENTS.md, and SPEC.md from this project. Confirm the folder. Briefly explain what I will build and what is already supplied. Guide me through setup one checkpoint at a time: verify the class Python, prepare the environment, run the starter checks, and help me open the unfinished game. Explain each step briefly as we go. Do not implement the rules, commit, or push yet.
+
+**Connection checkpoint:** the agent names your cloned folder and explains the task from its files. It should not need you to upload or paste them. [Using another coding agent?](https://kaw393939.github.io/218_spec/setup.html#another-coding-agent)
+
+Let it verify **Python 3.12.x**, prepare `.venv`, install the pinned requirements and Chromium, and run `.venv/bin/python check.py`. Ask it to explain errors and the smallest fix; [Python help](https://kaw393939.github.io/218_spec/setup.html#python-version) covers the class setup. Expect **PASS** at each check and **STARTER BASELINE ONLY**: the missing game rules are not verified yet.
+
+When ready, use your original **class terminal**, still in the clone, to start the game:
+
+```sh
 .venv/bin/python run.py
 ```
 
-The remote should name **your copy** using `git@github.com:` for fetch and push. Open **http://127.0.0.1:5050**. Click a move: expect both choices and **“Starter: game rules not built yet.”** A missing winner is the task, not a failed setup. Leave this **class terminal** running the game; code edits reload automatically. Use the app's separate project terminal below for checks and Git.
+Open the printed address, usually **http://127.0.0.1:5050**. Click a move: expect both choices and **“Starter: game rules not built yet.”** A missing winner is the task, not a failed setup. Leave this terminal running the game; code edits reload automatically. Use the AI project's separate terminal for checks and Git.
 
-**Checkpoint:** you can see the game and its unfinished notice. Stuck? [Setup help](https://kaw393939.github.io/218_spec/setup.html).
+**Checkpoint:** your agent is connected to the clone, the starter checks pass, and you can see the game's unfinished notice. Stuck? [Setup help](https://kaw393939.github.io/218_spec/setup.html).
 
 **Returning later?** In your class terminal, `cd` to this existing clone and run `.venv/bin/python run.py` again. Reopen the same project/chat in ChatGPT desktop and continue at your last checkpoint; do not clone or install again. If the game is already running, leave that server running.
 
 ## 2. Decide with your coding agent
 
-In **ChatGPT desktop**, select **Codex** from the ChatGPT dropdown. Open your cloned folder with **⌘O on Mac / Ctrl+O on Windows**. Start a chat in that project, choose **Work in → This computer**, and leave **Worktree** off. On Windows, first follow the [one-time WSL app setup](https://kaw393939.github.io/218_spec/setup.html#windows-wsl).
-
-Keep this one local chat for the exercise. Before asking AI, predict player **Rock** against computer **Paper** and say why. Then ask:
+Continue in this same project chat. Before asking AI, predict player **Rock** against computer **Paper** and say why. Then ask:
 
 > Read AGENTS.md and SPEC.md. Explain RPS-001 and propose a short plan. Include valid and invalid cases, what to test as a unit, through a request, and in a real browser. Do not edit yet. Keep scoring for later.
 
@@ -49,11 +60,9 @@ Open **New tab → Terminal** in ChatGPT desktop. This terminal should be in you
 ```sh
 pwd
 cat SPEC.md
-.venv/bin/python -m playwright install chromium
-.venv/bin/python check.py
 ```
 
-Confirm the path and saved plan. Chromium is a one-time test-browser download. Look for **PASS** at each check and **STARTER BASELINE ONLY**: these tests check the shell, not the missing rules. Resolve failures with [help](https://kaw393939.github.io/218_spec/setup.html) before continuing.
+Confirm the path and saved plan. Setup and the baseline checks were completed in Step 1; keep using this same clone.
 
 In **your GitHub repository → Issues → New issue**, create **“RPS-001: Play a round”**. Describe the scope and checks you agreed on; you can ask the agent for a short draft. Review before posting. Give its URL to the agent and ask it to put that link in **SPEC.md → Work record**.
 
@@ -117,4 +126,4 @@ In **your GitHub repository → Pull requests → New pull request**, use base `
 
 **Done:** the game works locally, the PR is merged, its issue is closed, and the spec links to code and actual checks. Return to the **class terminal running the game** and stop it with Ctrl+C. No website deployment or extra reflection document is required.
 
-**Next, with less guidance:** [RPS-002: first to two wins](NEXT.md). Write your own short request and test plan. Keep it in a separate issue/PR. Optional: personalize your game after the rules work.
+**Next, with less guidance:** [choose another small feature](NEXT.md). Try first-to-two scoring, explain why a move won, or personalize the game. Choose one, write your own short request and test plan, and use a separate issue/PR.

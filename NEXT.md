@@ -1,8 +1,16 @@
-# Next: RPS-002 — First to two wins
+# Choose your next feature
 
-**Your turn with less guidance.** Reuse the process from RPS-001; write your own short request and test plan rather than copying the first lab's full prompts.
+**Your turn with less guidance.** Finish and merge RPS-001 first. Choose **one** small feature, write your own short request, and ask AI to help clarify examples and checks before coding.
 
-Finish and merge RPS-001 first. Start this change from your updated `main`:
+| Feature | What you practice |
+| --- | --- |
+| **RPS-002: First to two wins** — suggested next step | State, ties, match boundaries, and reset. See the starting decisions below. |
+| **RPS-003: Explain the result** — e.g. “Paper covers rock” | Turning examples into clear output and testing every matchup, including ties. |
+| **RPS-004: Make it yours** — a game title, colors, and move symbols | Describing a design, reviewing it in the browser, and keeping readable contrast and text labels. |
+
+Add only your chosen feature to `SPEC.md`. Give it its own issue and PR. Keep the existing rules and checks working.
+
+Reopen the same project. Use the README's **Returning later** instructions to run the game. Start your change from updated `main`; use `rps-003` or `rps-004` in the last command if you chose that feature:
 
 ```sh
 git switch main
@@ -11,6 +19,8 @@ git switch -c rps-002
 ```
 
 Repeat: discuss → update the spec and open an issue → build → AI checks → your review → PR.
+
+## Suggested next step: RPS-002
 
 Agree these decisions **before** coding:
 
@@ -24,4 +34,4 @@ Add RPS-002 to `SPEC.md`, with examples for a tie, a match win, another click af
 
 Plan valid play and rejected post-match actions at the appropriate test level. Keep most scoring/reset combinations in fast tests and one complete match/reset journey in the browser. Run `.venv/bin/python check.py` before review; passing the old round tests alone does not verify the new match behavior.
 
-Keep this feature in its own issue and PR. A game name/color change is optional after behavior works; keep text labels and readable contrast.
+Ask AI to test and review first, then try it yourself. Explain one result using its requirement, code, and test before keeping the change.
