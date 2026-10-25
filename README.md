@@ -6,7 +6,7 @@ Start with **your GitHub copy → SSH clone → local AI project**. The steps be
 
 **Try → Decide → Build → Check → Keep.** If you stop, return to this README at the last checkpoint you completed. [Visual overview](https://kaw393939.github.io/218_spec/).
 
-**Work through it as a conversation.** The agent will pause for your prediction, an explanation of one test, and something you saw while playing. A sentence is enough; “I'm not sure” is useful too. Ask for a hint or example whenever you need one. Use the steps below to keep your place.
+**Work through it as a conversation.** The agent will pause for your prediction, an explanation of one test, and something you saw while playing. A sentence is enough; “I'm not sure” is useful too. Ask for a hint or example whenever you need one. Follow its questions and use the steps below to keep your place; the sample prompts are there when you need a nudge.
 
 ## 1. Try the starter
 
@@ -49,7 +49,7 @@ Tell the agent what you see. It will ask what the passing starter checks verifie
 
 ## 2. Decide with your coding agent
 
-Continue in this same project chat. Say:
+Continue in this same project chat. The agent will guide the discussion; if you need a nudge, say:
 
 > The starter is running. Help me plan RPS-001. Ask me to predict one round before you explain it. Wait for my answer, then help me agree on a short plan and checks. Do not edit yet. Keep scoring for later.
 
@@ -81,7 +81,7 @@ git switch -c rps-001
 
 Before switching, expect the `main` branch and your intended `M SPEC.md` edit. That uncommitted plan carries onto the new `rps-001` branch. If the branch exists, use `git switch rps-001`.
 
-In the **same AI chat**, ask:
+In the **same AI chat**, tell the agent you are ready to build. For example:
 
 > Check our saved plan against the code, then build RPS-001 and its agreed tests. Run .venv/bin/python check.py and review the diff without weakening checks. Show me one actual test for my predicted matchup and ask what it checks. Wait for my answer. Do not commit or push.
 
