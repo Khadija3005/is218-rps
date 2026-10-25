@@ -10,22 +10,25 @@ Use **ChatGPT desktop in Codex mode**, your **class terminal**, and a **browser*
 
 Use your existing GitHub SSH and Python setup. Mac students use Terminal; Windows students use the class Ubuntu/WSL terminal. Check `python3 --version`: expect **Python 3.12.x**. If different, use [Python help](https://kaw393939.github.io/218_spec/setup.html#python-version) before creating the environment.
 
-On [the starter](https://github.com/kaw393939/is218-rps-starter), choose **Use this template → Create a new repository**. Use your account, name it `my-rps`, choose **Public**, leave **Include all branches** off, and leave the optional Copilot prompt blank.
+On [the starter](https://github.com/kaw393939/is218-rps-starter), choose **Use this template → Create a new repository**. Use your account, name it `my-rps`, choose **Public**, leave **Include all branches** off, and leave the optional Copilot prompt blank. Already made your copy? Open it and skip creating another.
 
-In your projects folder, replace `YOUR-USERNAME` below. If you chose another repository name, replace `my-rps` too.
+In your projects folder, replace `YOUR-USERNAME` below. If you chose another repository name, replace `my-rps` too. **Run one command at a time; stop if one fails.** After `cd`, `pwd` must end in your repository's folder name before you create `.venv`.
 
 ```sh
 git clone git@github.com:YOUR-USERNAME/my-rps.git
 cd my-rps
+pwd
 git remote -v
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python run.py
 ```
 
-The remote should name **your copy** using `git@github.com:` for fetch and push. Open **http://127.0.0.1:5050**. Click a move: expect both choices and **“Starter: game rules not built yet.”** A missing winner is the task, not a failed setup. Leave this terminal running; code edits reload automatically.
+The remote should name **your copy** using `git@github.com:` for fetch and push. Open **http://127.0.0.1:5050**. Click a move: expect both choices and **“Starter: game rules not built yet.”** A missing winner is the task, not a failed setup. Leave this **class terminal** running the game; code edits reload automatically. Use the app's separate project terminal below for checks and Git.
 
-**Checkpoint:** you can see the game and its unfinished notice. Stuck? [Setup help](https://kaw393939.github.io/218_spec/setup.html). Already have your copy? Keep it; do not create another.
+**Checkpoint:** you can see the game and its unfinished notice. Stuck? [Setup help](https://kaw393939.github.io/218_spec/setup.html).
+
+**Returning later?** In your class terminal, `cd` to this existing clone and run `.venv/bin/python run.py` again. Reopen the same project/chat in ChatGPT desktop and continue at your last checkpoint; do not clone or install again. If the game is already running, leave that server running.
 
 ## 2. Decide with your coding agent
 
@@ -65,7 +68,7 @@ git status --short --branch
 git switch -c rps-001
 ```
 
-Expect `## main...origin/main` and your intended `SPEC.md` edit. If the branch exists, use `git switch rps-001`.
+Before switching, expect the `main` branch and your intended `M SPEC.md` edit. That uncommitted plan carries onto the new `rps-001` branch. If the branch exists, use `git switch rps-001`.
 
 In the **same AI chat**, ask:
 
@@ -110,6 +113,6 @@ git push -u origin rps-001
 
 In **your GitHub repository → Pull requests → New pull request**, use base `main` and compare `rps-001`. Describe the result and actual checks; add **`Closes #N`** with your issue number. In **Files changed**, verify the added tests use real rules rather than just the supplied stubs. Wait for **Python checks** to pass, then merge when it matches the spec.
 
-**Done:** the game works locally, the PR is merged, its issue is closed, and the spec links to code and actual checks. Stop your server with Ctrl+C. No website deployment or extra reflection document is required.
+**Done:** the game works locally, the PR is merged, its issue is closed, and the spec links to code and actual checks. Return to the **class terminal running the game** and stop it with Ctrl+C. No website deployment or extra reflection document is required.
 
 **Next, with less guidance:** [RPS-002: first to two wins](NEXT.md). Write your own short request and test plan. Keep it in a separate issue/PR. Optional: personalize your game after the rules work.
