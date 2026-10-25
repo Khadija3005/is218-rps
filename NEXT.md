@@ -2,6 +2,8 @@
 
 **Your turn with less guidance.** Finish and merge RPS-001 first. Choose **one** small feature, write your own short request, and ask AI to help clarify examples and checks before coding.
 
+Give the agent your own example of what should happen. Keep the conversation: predict an outcome, explain one test together, then try the result and describe what you saw. Ask for one step at a time whenever you need help.
+
 | Feature | What you practice |
 | --- | --- |
 | **RPS-002: First to two wins** — suggested next step | State, ties, match boundaries, and reset. See the starting decisions below. |

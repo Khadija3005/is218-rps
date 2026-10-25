@@ -6,6 +6,8 @@ Start with **your GitHub copy → SSH clone → local AI project**. The steps be
 
 **Try → Decide → Build → Check → Keep.** If you stop, return to this README at the last checkpoint you completed. [Visual overview](https://kaw393939.github.io/218_spec/).
 
+**Work through it as a conversation.** The agent will pause for your prediction, an explanation of one test, and something you saw while playing. A sentence is enough; “I'm not sure” is useful too. Ask for a hint or example whenever you need one. Use the steps below to keep your place.
+
 ## 1. Try the starter
 
 **First, get the repo into your AI project.** Use your existing class SSH setup in macOS Terminal or Ubuntu/WSL on Windows. The agent will help check Python and prepare the app after you open the folder.
@@ -25,7 +27,7 @@ In **ChatGPT desktop**, select **Codex** from the ChatGPT dropdown. Open this cl
 
 Ask:
 
-> Read README.md, AGENTS.md, and SPEC.md from this project. Confirm the folder. Briefly explain what I will build and what is already supplied. Guide me through setup one checkpoint at a time: verify the class Python, prepare the environment, run the starter checks, and help me open the unfinished game. Explain each step briefly as we go. Do not implement the rules, commit, or push yet.
+> Read README.md, AGENTS.md, and SPEC.md. Guide me through this lab one small step at a time. Explain briefly, then give me one action or question and wait for my reply. Ask me to predict and explain as we go; help if I'm unsure. Start by confirming this folder and helping me run the unfinished game. Do not implement the rules, commit, or push yet.
 
 **Connection checkpoint:** the agent names your cloned folder and explains the task from its files. It should not need you to upload or paste them. [Using another coding agent?](https://kaw393939.github.io/218_spec/setup.html#another-coding-agent)
 
@@ -41,19 +43,19 @@ Open the printed address, usually **http://127.0.0.1:5050**. Click a move: expec
 
 **Checkpoint:** your agent is connected to the clone, the starter checks pass, and you can see the game's unfinished notice. Stuck? [Setup help](https://kaw393939.github.io/218_spec/setup.html).
 
+Tell the agent what you see. It will ask what the passing starter checks verified; talk that through before planning the missing rules.
+
 **Returning later?** In your class terminal, `cd` to this existing clone and run `.venv/bin/python run.py` again. If you used another port, reuse that command and address. Reopen the same project/chat in ChatGPT desktop and continue at your last checkpoint; do not clone or install again. If the game is already running, leave that server running.
 
 ## 2. Decide with your coding agent
 
-Continue in this same project chat. Before asking AI, predict player **Rock** against computer **Paper** and say why. Then ask:
+Continue in this same project chat. Say:
 
-> Read AGENTS.md and SPEC.md. Explain RPS-001 and propose a short plan. Include valid and invalid cases, what to test as a unit, through a request, and in a real browser. Do not edit yet. Keep scoring for later.
+> The starter is running. Help me plan RPS-001. Ask me to predict one round before you explain it. Wait for my answer, then help me agree on a short plan and checks. Do not edit yet. Keep scoring for later.
 
-Compare its answer with the [nine-matchup table](SPEC.md#expected-results). A valid loss is a **positive** case; a missing or unsupported move is a **negative** case. Ask about anything you cannot explain. [Short introduction to the checks](https://kaw393939.github.io/218_spec/checks.html).
+Give your prediction and why. Check it against the [nine-matchup table](SPEC.md#expected-results), and ask for help if they differ. Discuss a valid losing round and an input the server should reject. A valid loss is a **positive** case; missing or unsupported input is a **negative** case. The agent can explain this using the game. [Short introduction to the checks](https://kaw393939.github.io/218_spec/checks.html).
 
-When you agree, ask:
-
-> Save our agreed plan under “Agreed plan” in SPEC.md. Preserve the expected results. Do not edit the app yet.
+When the plan makes sense to you, ask the agent to save it under **Agreed plan** in `SPEC.md`, preserving the expected results. Keep the app unchanged for now.
 
 Open **New tab → Terminal** in ChatGPT desktop. This terminal should be in your cloned folder. Keep using it for checks and Git:
 
@@ -81,11 +83,11 @@ Before switching, expect the `main` branch and your intended `M SPEC.md` edit. T
 
 In the **same AI chat**, ask:
 
-> Compare our saved plan with the code and supplied fixtures. Explain conflicts or needed changes before editing; do not restart the whole plan. If it fits, implement RPS-001 and its agreed tests. Run .venv/bin/python check.py, review the diff against SPEC.md, and fix problems without weakening checks. Report actual results and remaining human checks. Do not commit or push.
+> Check our saved plan against the code, then build RPS-001 and its agreed tests. Run .venv/bin/python check.py and review the diff without weakening checks. Show me one actual test for my predicted matchup and ask what it checks. Wait for my answer. Do not commit or push.
 
 Review file/command approval requests. The prepared checks use **Black** for formatting, **Pylint** for Python analysis, and **pytest** for behavior, including a small real-browser journey. The agent should add nine rule cases, a real request/result check, and a browser round with replay—not repeat every case through the browser.
 
-**Checkpoint:** AI reports actual commands/results and what remains for you. Passing unchanged starter tests alone is not enough.
+**Checkpoint:** AI reports actual commands/results and shows you one new test. Explain what mistake it could catch; ask for a hint if needed. Passing unchanged starter tests alone is not enough.
 
 ## 4. Check and give feedback
 
@@ -103,7 +105,7 @@ cat tests/e2e/test_round.py
 
 Press `q` if Git opens a scrolling view. `??` means a new, untracked file: `git diff` does not show it yet, so inspect the two test files above too. Find the assertion for your predicted matchup and compare it with the spec; check that the browser test plays again using real rules. You can open files in the app with **⌘P / Ctrl+P**, or optionally inspect them in VS Code.
 
-Tell the agent what you actually did and saw. For a mismatch, describe the action, expected result, and observed result; ask for a focused fix and retest. [Worked failure example](https://kaw393939.github.io/218_spec/checks.html#when-a-check-fails) shows how.
+Tell the agent about one round: your move, the computer's move, and why the result makes sense. For a mismatch, describe the action, expected result, and observed result; ask for a focused fix and retest. [Worked failure example](https://kaw393939.github.io/218_spec/checks.html#when-a-check-fails) shows how.
 
 During fixes, `.venv/bin/python check.py --fast` skips the browser. Use the full command before review and the PR. For formatting, `.venv/bin/python -m black *.py tests` applies the shared style; inspect its edits. Do not remove meaningful assertions or disable checks just to pass.
 

@@ -27,7 +27,7 @@ Results are from the **player’s perspective**. `determine_winner(player, compu
 
 ### Agreed plan
 
-Discuss the plan with your local coding agent before implementation. Once you agree, ask it to replace this paragraph with the short plan, preserving the expected results above. Keep the agreement in this file and continue in the same chat.
+Before implementation, predict one matchup and explain it with your local coding agent. Discuss a short plan and checks. Once it makes sense, ask the agent to replace this paragraph with the agreed plan, preserving the expected results above. Continue in the same chat.
 
 ### Checks
 
