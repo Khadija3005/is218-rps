@@ -10,7 +10,7 @@ Start with **your GitHub copy → SSH clone → local AI project**. The steps be
 
 **First, get the repo into your AI project.** Use your existing class SSH setup in macOS Terminal or Ubuntu/WSL on Windows. The agent will help check Python and prepare the app after you open the folder.
 
-On [the starter](https://github.com/kaw393939/is218-rps-starter), choose **Use this template → Create a new repository**. Use your account, name it `my-rps`, choose **Public**, leave **Include all branches** off, and leave the optional Copilot prompt blank. Already made your copy? Open it and skip creating another.
+Sign in to GitHub. On [the starter](https://github.com/kaw393939/is218-rps-starter), choose **Use this template → Create a new repository**. Use your account, name it `my-rps`, choose **Public**, leave **Include all branches** off, and leave the optional Copilot prompt blank. Already made your copy? Open it and skip creating another.
 
 In your projects folder, replace `YOUR-USERNAME` below. If you chose another repository name, replace `my-rps` too. **Run one command at a time; stop if one fails.** `pwd` must end in your repository's folder name, and both lines from `git remote -v` must identify **your copy** using `git@github.com:`.
 
@@ -37,11 +37,11 @@ When ready, use your original **class terminal**, still in the clone, to start t
 .venv/bin/python run.py
 ```
 
-Open the printed address, usually **http://127.0.0.1:5050**. Click a move: expect both choices and **“Starter: game rules not built yet.”** A missing winner is the task, not a failed setup. Leave this terminal running the game; code edits reload automatically. Use the AI project's separate terminal for checks and Git.
+Open the printed address, usually **http://127.0.0.1:5050**. Click a move: expect both choices and **“Starter: game rules not built yet.”** A missing winner is the task, not a failed setup. Leave this terminal running the game; code edits reload automatically. You will open the AI project's separate terminal for checks and Git in Step 2.
 
 **Checkpoint:** your agent is connected to the clone, the starter checks pass, and you can see the game's unfinished notice. Stuck? [Setup help](https://kaw393939.github.io/218_spec/setup.html).
 
-**Returning later?** In your class terminal, `cd` to this existing clone and run `.venv/bin/python run.py` again. Reopen the same project/chat in ChatGPT desktop and continue at your last checkpoint; do not clone or install again. If the game is already running, leave that server running.
+**Returning later?** In your class terminal, `cd` to this existing clone and run `.venv/bin/python run.py` again. If you used another port, reuse that command and address. Reopen the same project/chat in ChatGPT desktop and continue at your last checkpoint; do not clone or install again. If the game is already running, leave that server running.
 
 ## 2. Decide with your coding agent
 
@@ -49,7 +49,7 @@ Continue in this same project chat. Before asking AI, predict player **Rock** ag
 
 > Read AGENTS.md and SPEC.md. Explain RPS-001 and propose a short plan. Include valid and invalid cases, what to test as a unit, through a request, and in a real browser. Do not edit yet. Keep scoring for later.
 
-Compare its answer with the nine-matchup table. A valid loss is a **positive** case; a missing or unsupported move is a **negative** case. Ask about anything you cannot explain. [Short introduction to the checks](https://kaw393939.github.io/218_spec/checks.html).
+Compare its answer with the [nine-matchup table](SPEC.md#expected-results). A valid loss is a **positive** case; a missing or unsupported move is a **negative** case. Ask about anything you cannot explain. [Short introduction to the checks](https://kaw393939.github.io/218_spec/checks.html).
 
 When you agree, ask:
 

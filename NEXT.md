@@ -8,15 +8,17 @@
 | **RPS-003: Explain the result** — e.g. “Paper covers rock” | Turning examples into clear output and testing every matchup, including ties. |
 | **RPS-004: Make it yours** — a game title, colors, and move symbols | Describing a design, reviewing it in the browser, and keeping readable contrast and text labels. |
 
-Add only your chosen feature to `SPEC.md`. Give it its own issue and PR. Keep the existing rules and checks working.
-
-Reopen the same project. Use the README's **Returning later** instructions to run the game. Start your change from updated `main`; use `rps-003` or `rps-004` in the last command if you chose that feature:
+Reopen the same project. With a clean working tree, start your change from updated `main`; use `rps-003` or `rps-004` in the last command if you chose that feature:
 
 ```sh
 git switch main
 git pull --ff-only
 git switch -c rps-002
 ```
+
+Then use the README's **Returning later** instructions to run the game.
+
+Add only your chosen feature to `SPEC.md`. Give it its own issue and PR. Keep the existing rules and checks working.
 
 Repeat: discuss → update the spec and open an issue → build → AI checks → your review → PR.
 
