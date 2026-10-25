@@ -61,7 +61,7 @@ Read its plan before approving. Supplied tests check the shell, **not the missin
 
 ## 4. Play, inspect, and give feedback
 
-Refresh the local game. Play several rounds: do both choices and the result make sense? Can you choose again? Try Tab and Enter too.
+Refresh the local game, then choose a move to start a new round. Play several rounds: do both choices and the result make sense? Can you choose again? Try Tab and Enter too.
 
 In the second terminal:
 
