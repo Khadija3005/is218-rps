@@ -1,92 +1,105 @@
 # Build a game you can trust—with AI
 
-Turn this unfinished Rock, Paper, Scissors starter into a playable game. **Agree what correct means, guide AI, and check its work.** Practice a short spec, AI testing and review, and a GitHub change someone else can follow.
+This is a **self-paced, guided first lab**. Make one round of Rock, Paper, Scissors work, then show why you trust the result. You will agree on a short spec, guide an AI coding agent, use automatic checks, and review its work.
 
-Use **ChatGPT desktop to discuss**, **Codex to edit and test**, **VS Code to inspect**, and your **class terminal for Git**. Keep the same project folder open in Codex and VS Code. No API key is needed.
+Use **ChatGPT desktop in Codex mode**, your **class terminal**, and a **browser**. Codex is the coding agent inside the app: it can read your project, edit files, and run checks. **VS Code is optional.** No API key, separate Codex CLI, or classroom demonstration is required.
 
-**Try → Decide → Build → Check → Keep.** [Visual overview and help](https://kaw393939.github.io/218_spec/).
-
-**Give AI a feedback loop.** The tools are prepared: **pytest** checks expected behavior, **Pylint** finds suspicious Python and standards violations, and **Black** checks consistent formatting. A small real-browser test checks the interface too. One command runs them locally and on GitHub. Passing means these checks found no problem—not that every requirement is proven.
-
-Plan **positive** cases (valid wins, losses, and ties) and **negative** cases (missing or unsupported moves). Use quick **unit** tests for rules, **integration** tests for requests/results, and a few **end-to-end** browser checks for the player journey. [Short introduction and examples](https://kaw393939.github.io/218_spec/checks.html).
+**Try → Decide → Build → Check → Keep.** If you stop, return to this README at the last checkpoint you completed. [Visual overview](https://kaw393939.github.io/218_spec/).
 
 ## 1. Try the starter
 
-Use your class Python 3.12, VS Code, Git and GitHub SSH. Windows students use the class Ubuntu/WSL terminal; Mac students use Terminal. These commands work in both.
+Use your existing GitHub SSH and Python setup. Mac students use Terminal; Windows students use the class Ubuntu/WSL terminal. Check `python3 --version`: expect **Python 3.12.x**. If different, use [Python help](https://kaw393939.github.io/218_spec/setup.html#python-version) before creating the environment.
 
-On [the starter](https://github.com/kaw393939/is218-rps-starter), choose **Use this template → Create a new repository**. Use your account, name it `my-rps`, choose **Public**, and leave **Include all branches** off. Leave the optional Copilot prompt blank. If the name is taken, choose another and use it below.
+On [the starter](https://github.com/kaw393939/is218-rps-starter), choose **Use this template → Create a new repository**. Use your account, name it `my-rps`, choose **Public**, leave **Include all branches** off, and leave the optional Copilot prompt blank.
 
-In your projects folder, replace `YOUR-USERNAME` with your GitHub username:
+In your projects folder, replace `YOUR-USERNAME` below. If you chose another repository name, replace `my-rps` too.
 
 ```sh
 git clone git@github.com:YOUR-USERNAME/my-rps.git
 cd my-rps
 git remote -v
-code .
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
-.venv/bin/python -m playwright install chromium
-.venv/bin/python check.py
 .venv/bin/python run.py
 ```
 
-The remote should name **your copy**, using `git@github.com:` for fetch and push. Chromium is a one-time test-browser download; checks use it automatically without opening a window. Look for **PASS** at each check stage, **even though the rules are unfinished**. The supplied tests check the shell, not RPS-001. Resolve a failed check using [Setup help](https://kaw393939.github.io/218_spec/setup.html) before proceeding.
+The remote should name **your copy** using `git@github.com:` for fetch and push. Open **http://127.0.0.1:5050**. Click a move: expect both choices and **“Starter: game rules not built yet.”** A missing winner is the task, not a failed setup. Leave this terminal running; code edits reload automatically.
 
-Open **http://127.0.0.1:5050**. Expect three choices and **“Starter: game rules not built yet.”** Click a choice: no winner is expected yet. Leave this terminal running; code edits reload automatically.
+**Checkpoint:** you can see the game and its unfinished notice. Stuck? [Setup help](https://kaw393939.github.io/218_spec/setup.html). Already have your copy? Keep it; do not create another.
 
-Open a second terminal in this project folder for the remaining commands. Open this same folder as a local project in Codex. Stuck? [Setup help](https://kaw393939.github.io/218_spec/setup.html). Already have your copy running? Continue below; do not create another copy.
+## 2. Decide with your coding agent
 
-## 2. Decide what to build
+In **ChatGPT desktop**, select **Codex** from the ChatGPT dropdown. Open your cloned folder with **⌘O on Mac / Ctrl+O on Windows**. Start a chat in that project, choose **Work in → This computer**, and leave **Worktree** off. On Windows, first follow the [one-time WSL app setup](https://kaw393939.github.io/218_spec/setup.html#windows-wsl).
 
-Open `SPEC.md` in VS Code and attach it in ChatGPT desktop. Ask:
+Keep this one local chat for the exercise. Before asking AI, predict player **Rock** against computer **Paper** and say why. Then ask:
 
-> Help me understand RPS-001. Do not code. Explain what the player should see. Propose a small test plan with positive/negative cases, explicit expected results, and unit/integration/E2E levels. Use the supplied checks where useful; avoid duplicate tests and extra features.
+> Read AGENTS.md and SPEC.md. Explain RPS-001 and propose a short plan. Include valid and invalid cases, what to test as a unit, through a request, and in a real browser. Do not edit yet. Keep scoring for later.
 
-Read the nine-matchup table yourself. Whose perspective does “win” mean? Ask about anything unclear. Keep scoring for later. Save the agreed plan in **SPEC.md → Agreed plan**, replacing that section's starter text in VS Code. Carry the decisions, not the whole conversation.
+Compare its answer with the nine-matchup table. A valid loss is a **positive** case; a missing or unsupported move is a **negative** case. Ask about anything you cannot explain. [Short introduction to the checks](https://kaw393939.github.io/218_spec/checks.html).
 
-In **your repository → Issues → New issue**, create **“RPS-001: Play a round”**. Use this short body, adjusting it to your agreed plan:
+When you agree, ask:
 
-> Implement RPS-001 in SPEC.md. Show both choices and the correct result. A new choice starts another round. Check nine unit outcomes, a real submitted round, supplied invalid-input cases, and a short browser journey. No scoring yet.
+> Save our agreed plan under “Agreed plan” in SPEC.md. Preserve the expected results. Do not edit the app yet.
 
-Copy the issue URL into **SPEC.md → Work record**.
+Open **New tab → Terminal** in ChatGPT desktop. This terminal should be in your cloned folder. Keep using it for checks and Git:
+
+```sh
+pwd
+cat SPEC.md
+.venv/bin/python -m playwright install chromium
+.venv/bin/python check.py
+```
+
+Confirm the path and saved plan. Chromium is a one-time test-browser download. Look for **PASS** at each check and **STARTER BASELINE ONLY**: these tests check the shell, not the missing rules. Resolve failures with [help](https://kaw393939.github.io/218_spec/setup.html) before continuing.
+
+In **your GitHub repository → Issues → New issue**, create **“RPS-001: Play a round”**. Describe the scope and checks you agreed on; you can ask the agent for a short draft. Review before posting. Give its URL to the agent and ask it to put that link in **SPEC.md → Work record**.
+
+**Checkpoint:** `SPEC.md` contains your agreed plan and issue link. No transfer between AI apps or manual code copying is needed.
 
 ## 3. Build and let AI check first
 
-In the second terminal:
+In the app's terminal:
 
 ```sh
 git status --short --branch
 git switch -c rps-001
 ```
 
-Expect `## main...origin/main` and only your intended `SPEC.md` edit. If the branch already exists, use `git switch rps-001`.
+Expect `## main...origin/main` and your intended `SPEC.md` edit. If the branch exists, use `git switch rps-001`.
 
-In Codex, with **your cloned folder** open, ask:
+In the **same AI chat**, ask:
 
-> Read AGENTS.md, SPEC.md and the supplied test fixtures. Explain your implementation and test plan; flag conflicts before coding. After I approve, implement RPS-001 in game.py. Add tests/test_game.py with nine explicit unit outcomes and one real request/result integration check. Reuse the supplied negative request tests. Add tests/e2e/test_round.py for a real browser round and replay using live_server and page. Fix the computer choice, not the rule function. Run .venv/bin/python check.py and review the diff against the spec. Fix problems without weakening checks. Report actual results and remaining human checks. Do not commit or push.
+> Compare our saved plan with the code and supplied fixtures. Explain conflicts or needed changes before editing; do not restart the whole plan. If it fits, implement RPS-001 and its agreed tests. Run .venv/bin/python check.py, review the diff against SPEC.md, and fix problems without weakening checks. Report actual results and remaining human checks. Do not commit or push.
 
-Read its plan before approving. New tests should use the table's answers, not calculate expected answers with the winner function. Mark tests `unit`, `integration`, or `e2e`. The browser test uses a supplied temporary server; you do not need to manage another server or port for it.
+Review file/command approval requests. The prepared checks use **Black** for formatting, **Pylint** for Python analysis, and **pytest** for behavior, including a small real-browser journey. The agent should add nine rule cases, a real request/result check, and a browser round with replay—not repeat every case through the browser.
 
-## 4. Play, inspect, and give feedback
+**Checkpoint:** AI reports actual commands/results and what remains for you. Passing unchanged starter tests alone is not enough.
 
-Refresh the local game, then choose a move to start a new round. Play several rounds: do both choices and the result make sense? Can you choose again? Try Tab and Enter too.
+## 4. Check and give feedback
 
-In the second terminal:
+Refresh the local game, then choose a new move. Play several rounds. Do both choices and the result make sense? Can you play again? Try Tab and Enter too.
+
+In the app's terminal:
 
 ```sh
 .venv/bin/python check.py
 git diff
+cat tests/test_game.py
 ```
 
-Press `q` if Git opens a scrolling view. Inspect `game.py` and its tests in VS Code. Ask AI to explain one positive case, one negative case, and why they use those test levels. Random clicking cannot reliably cover all nine matchups; deterministic tests do that.
+Press `q` if Git opens a scrolling view. Find the assertion for your predicted matchup and compare it with the spec. You can open files in the app with **⌘P / Ctrl+P**, or optionally inspect them in VS Code.
 
-During a fix, `.venv/bin/python check.py --fast` skips the browser for quicker feedback. Use the full command before review and the PR. For a formatting failure, `.venv/bin/python -m black *.py tests` applies the shared style; inspect the diff and rerun checks. Keep the tests and settings enabled.
+Tell the agent what you actually did and saw. For a mismatch, describe the action, expected result, and observed result; ask for a focused fix and retest. [Worked failure example](https://kaw393939.github.io/218_spec/checks.html#when-a-check-fails) shows how.
 
-Tell Codex what you actually saw. For a problem, describe what you did, expected, and saw; ask for a focused fix and retest. Ask it to replace the starter status in **SPEC.md → Work record** with actual checks and links to `game.py` and `tests/test_game.py`, preserving your plan and issue. Do not claim checks nobody performed.
+During fixes, `.venv/bin/python check.py --fast` skips the browser. Use the full command before review and the PR. For formatting, `.venv/bin/python -m black *.py tests` applies the shared style; inspect its edits. Do not remove meaningful assertions or disable checks just to pass.
+
+Ask the agent to replace starter status in **SPEC.md → Work record** with actual checks, your browser observations, and real code/test links. Preserve the plan and issue. Do not record checks nobody performed.
+
+**Checkpoint:** you can connect one requirement to its code and a meaningful test. You have tried the result yourself.
 
 ## 5. Keep the reviewed change
 
-Expect changes to `game.py`, `tests/test_game.py`, `tests/e2e/test_round.py`, and `SPEC.md`. Ask about any other changed files before keeping them.
+Expect `game.py`, `tests/test_game.py`, `tests/e2e/test_round.py`, and `SPEC.md`. Ask about other changed files before keeping them.
 
 ```sh
 git add game.py tests/test_game.py tests/e2e/test_round.py SPEC.md
@@ -95,8 +108,8 @@ git commit -m "RPS-001: play a round"
 git push -u origin rps-001
 ```
 
-In **your repository → Pull requests → New pull request**, use base `main` and compare `rps-001`. Briefly describe the result and actual checks. Include **`Closes #N`** with your issue number. Inspect **Files changed**, wait for **Python checks** to pass, then merge when it matches the spec. Deploying a website is not part of this exercise.
+In **your GitHub repository → Pull requests → New pull request**, use base `main` and compare `rps-001`. Describe the result and actual checks; add **`Closes #N`** with your issue number. In **Files changed**, verify the added tests use real rules rather than just the supplied stubs. Wait for **Python checks** to pass, then merge when it matches the spec.
 
-**Done:** the game works locally, the PR is merged, its issue is closed, and the spec links to code and actual checks. Stop the server with Ctrl+C. You should be able to point to a rule, its code, and evidence that it works.
+**Done:** the game works locally, the PR is merged, its issue is closed, and the spec links to code and actual checks. Stop your server with Ctrl+C. No website deployment or extra reflection document is required.
 
-**Next time:** [RPS-002: first to two wins](NEXT.md). Keep that separate from your first PR.
+**Next, with less guidance:** [RPS-002: first to two wins](NEXT.md). Write your own short request and test plan. Keep it in a separate issue/PR. Optional: personalize your game after the rules work.

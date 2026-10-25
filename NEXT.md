@@ -1,5 +1,7 @@
 # Next: RPS-002 — First to two wins
 
+**Your turn with less guidance.** Reuse the process from RPS-001; write your own short request and test plan rather than copying the first lab's full prompts.
+
 Finish and merge RPS-001 first. Start this change from your updated `main`:
 
 ```sh

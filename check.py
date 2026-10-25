@@ -23,7 +23,7 @@ def main() -> int:
     checks = [
         ("Black: formatting", ["black", "--check", "--diff", *paths]),
         ("Pylint: code analysis", ["pylint", *paths]),
-        ("pytest: unit + integration", ["pytest", "-q", "-m", "not e2e"]),
+        ("pytest: non-browser checks", ["pytest", "-q", "-m", "not e2e"]),
     ]
     if not options.fast:
         checks.append(
@@ -58,6 +58,10 @@ def main() -> int:
         print("\nFast checks passed; browser behavior has not been checked.")
     else:
         print("\nAll configured checks passed. Check their scope against SPEC.md.")
+    feature_tests = ("tests/test_game.py", "tests/e2e/test_round.py")
+    if not all((PROJECT / path).is_file() for path in feature_tests):
+        print("STARTER BASELINE ONLY: RPS-001 feature tests have not all been added.")
+        print("Passing shell checks does not verify the game rules or completion.")
     print("Compare the evidence with SPEC.md and review the game yourself.")
     return 0
 

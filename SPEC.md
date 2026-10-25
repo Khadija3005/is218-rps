@@ -27,7 +27,7 @@ Results are from the **player’s perspective**. `determine_winner(player, compu
 
 ### Agreed plan
 
-Replace this paragraph with your short plan after discussing it with ChatGPT. Keep the nine expected results above. Resolve questions before asking Codex to implement them.
+Discuss the plan with your local coding agent before implementation. Once you agree, ask it to replace this paragraph with the short plan, preserving the expected results above. Keep the agreement in this file and continue in the same chat.
 
 ### Checks
 

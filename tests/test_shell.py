@@ -79,7 +79,11 @@ def test_invalid_move_is_rejected_before_rules(client, monkeypatch, move):
     assert b"<script>" not in response.data
 
 
-def test_missing_move_is_rejected(client):
+def test_missing_move_is_rejected(client, monkeypatch):
+    def should_not_run(_player, _computer):
+        pytest.fail("A missing move must not reach the rule function")
+
+    monkeypatch.setattr(web.game, "determine_winner", should_not_run)
     response = client.post("/")
     assert response.status_code == 400
     assert b"Choose Rock, Paper, or Scissors to play." in response.data
