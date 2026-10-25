@@ -31,10 +31,19 @@ Replace this paragraph with your short plan after discussing it with ChatGPT. Ke
 
 ### Checks
 
-AI runs nine explicit rule cases plus a complete submitted round with a fixed computer move, then reviews the diff against this spec. The student plays, inspects a rule and its test, and gives feedback. Passing rule tests alone does not establish that the browser is usable or every control is wired correctly.
+Before coding, agree this small test plan with AI:
+
+| Level | Cases and evidence |
+| --- | --- |
+| Unit — positive | All nine literal expected results above, including valid losses and ties. |
+| Integration — positive | A submitted round uses the real rule function and displays both choices and the correct result. Fix the computer choice for the test. |
+| Integration — negative | Reuse supplied missing/unsupported-move tests: HTTP 400 and a helpful explanation, without calling the rules. A crash is not the intended result. |
+| E2E — positive | Add a real-browser round and replay in tests/e2e/test_round.py using the supplied live_server/page fixtures. Fix only the computer choice; use real rules and real HTTP. |
+
+Use `unit`, `integration`, and `e2e` pytest markers. Run `.venv/bin/python check.py` for Black, Pylint, fast tests, and browser checks; then review the diff. Keep shared settings and meaningful assertions intact. The student still plays, inspects a rule and its test, and gives feedback. Browser automation does not establish every aspect of usability or application performance.
 
 ### Work record
 
 - Issue: add your own issue URL.
 - Implementation: **Not implemented.** The shell is supplied; `game.py` is unfinished.
-- Checks: **Rules not verified.** Supplied tests cover the shell only. Record actual AI checks and your browser observations here after implementation; put detailed results in the PR.
+- Checks: **Rules not verified.** Supplied request/browser tests cover the shell only. After implementation, record actual full-check results and your browser observations here; put detailed results in the PR. Passing formatting and analysis alone is not evidence of correct rules.

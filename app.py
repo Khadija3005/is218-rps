@@ -18,6 +18,7 @@ RESULTS = {
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    """Display a supplied shell or the result of one submitted round."""
     player = computer = outcome = None
     unfinished = False
     error = None
@@ -50,4 +51,4 @@ def index():
         result=RESULTS[outcome] if outcome is not None else None,
         unfinished=unfinished,
         error=error,
-    ), 400 if error else 200
+    ), (400 if error else 200)

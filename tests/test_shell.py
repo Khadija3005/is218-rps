@@ -4,9 +4,15 @@ These tests stub the rule function. Students add tests/test_game.py with all
 nine real matchups from SPEC.md and a real request/result check for RPS-001.
 """
 
+# pytest injects fixtures by their function names; descriptive test names act
+# as the test documentation. Keep all other Pylint diagnostics enabled.
+# pylint: disable=redefined-outer-name,missing-function-docstring
+
 import pytest
 
 import app as web
+
+pytestmark = pytest.mark.integration
 
 
 @pytest.fixture
@@ -24,7 +30,7 @@ def test_page_has_three_labeled_moves(client):
 
 
 def test_completed_rules_hide_initial_starter_notice(client, monkeypatch):
-    monkeypatch.setattr(web.game, "determine_winner", lambda player, computer: "tie")
+    monkeypatch.setattr(web.game, "determine_winner", lambda _player, _computer: "tie")
     response = client.get("/")
     assert response.status_code == 200
     assert b"game rules not built yet" not in response.data
@@ -35,8 +41,10 @@ def test_completed_rules_hide_initial_starter_notice(client, monkeypatch):
     [("win", "You win!"), ("lose", "Computer wins"), ("tie", "It’s a tie")],
 )
 def test_shell_displays_stubbed_result(client, monkeypatch, outcome, heading):
-    monkeypatch.setattr(web.random, "choice", lambda moves: "scissors")
-    monkeypatch.setattr(web.game, "determine_winner", lambda player, computer: outcome)
+    monkeypatch.setattr(web.random, "choice", lambda _moves: "scissors")
+    monkeypatch.setattr(
+        web.game, "determine_winner", lambda _player, _computer: outcome
+    )
     response = client.post("/", data={"move": "rock"})
     page = response.get_data(as_text=True)
     assert response.status_code == 200
@@ -49,19 +57,19 @@ def test_shell_displays_stubbed_result(client, monkeypatch, outcome, heading):
 
 @pytest.mark.parametrize("method", ["GET", "POST"])
 def test_unfinished_rules_have_friendly_message(client, monkeypatch, method):
-    def unfinished(player, computer):
+    def unfinished(_player, _computer):
         raise NotImplementedError
 
     monkeypatch.setattr(web.game, "determine_winner", unfinished)
     response = client.open("/", method=method, data={"move": "paper"})
     assert response.status_code == 200
     assert b"Starter: game rules not built yet." in response.data
-    assert b'data-outcome=' not in response.data
+    assert b"data-outcome=" not in response.data
 
 
 @pytest.mark.parametrize("move", ["lizard", "<script>alert(1)</script>", ""])
 def test_invalid_move_is_rejected_before_rules(client, monkeypatch, move):
-    def should_not_run(player, computer):
+    def should_not_run(_player, _computer):
         pytest.fail("Invalid input must not reach the rule function")
 
     monkeypatch.setattr(web.game, "determine_winner", should_not_run)

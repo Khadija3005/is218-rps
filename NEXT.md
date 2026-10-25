@@ -20,4 +20,6 @@ Agree these decisions **before** coding:
 
 Add RPS-002 to `SPEC.md`, with examples for a tie, a match win, another click after the match, and reset. Ask AI how it will test the sequence deterministically and preserve RPS-001’s nine rules. Choose the simplest design together; do not add a database or architecture pattern just for this exercise.
 
+Plan valid play and rejected post-match actions at the appropriate test level. Keep most scoring/reset combinations in fast tests and one complete match/reset journey in the browser. Run `.venv/bin/python check.py` before review; passing the old round tests alone does not verify the new match behavior.
+
 Keep this feature in its own issue and PR. A game name/color change is optional after behavior works; keep text labels and readable contrast.
