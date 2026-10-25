@@ -80,17 +80,19 @@ Review file/command approval requests. The prepared checks use **Black** for for
 
 ## 4. Check and give feedback
 
-Refresh the local game, then choose a new move. Play several rounds. Do both choices and the result make sense? Can you play again? Try Tab and Enter too.
+Open the server's printed address again, then choose a move. Play several rounds. Do both choices and the result make sense? Can you play again? Try Tab and Enter too; in Safari, use Option+Tab if Tab skips buttons.
 
 In the app's terminal:
 
 ```sh
 .venv/bin/python check.py
+git status --short
 git diff
 cat tests/test_game.py
+cat tests/e2e/test_round.py
 ```
 
-Press `q` if Git opens a scrolling view. Find the assertion for your predicted matchup and compare it with the spec. You can open files in the app with **⌘P / Ctrl+P**, or optionally inspect them in VS Code.
+Press `q` if Git opens a scrolling view. `??` means a new, untracked file: `git diff` does not show it yet, so inspect the two test files above too. Find the assertion for your predicted matchup and compare it with the spec; check that the browser test plays again using real rules. You can open files in the app with **⌘P / Ctrl+P**, or optionally inspect them in VS Code.
 
 Tell the agent what you actually did and saw. For a mismatch, describe the action, expected result, and observed result; ask for a focused fix and retest. [Worked failure example](https://kaw393939.github.io/218_spec/checks.html#when-a-check-fails) shows how.
 
