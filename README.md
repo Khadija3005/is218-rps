@@ -10,7 +10,7 @@ Use **ChatGPT desktop to discuss**, **Codex to edit and test**, **VS Code to ins
 
 Use your class Python 3.12, VS Code, Git and GitHub SSH. Windows students use the class Ubuntu/WSL terminal; Mac students use Terminal. These commands work in both.
 
-On [the starter](https://github.com/kaw393939/is218-rps-starter), choose **Use this template → Create a new repository**. Use your account, name it `my-rps`, choose **Public**, and leave **Include all branches** unchecked. If the name is taken, choose another and use it below.
+On [the starter](https://github.com/kaw393939/is218-rps-starter), choose **Use this template → Create a new repository**. Use your account, name it `my-rps`, choose **Public**, and leave **Include all branches** off. Leave the optional Copilot prompt blank. If the name is taken, choose another and use it below.
 
 In your projects folder, replace `YOUR-USERNAME` with your GitHub username:
 
@@ -72,7 +72,7 @@ git diff
 
 Press `q` if Git opens a scrolling view. Open `game.py` and `tests/test_game.py` in VS Code. Ask AI to explain one winning case and its test. Random clicking cannot reliably cover all nine matchups; deterministic tests do that.
 
-Tell Codex what you actually saw. For a problem, describe what you did, expected, and saw; ask for a focused fix and retest. Ask it to update **SPEC.md → Work record** with actual checks and links to `game.py` and `tests/test_game.py`. Do not claim checks nobody performed.
+Tell Codex what you actually saw. For a problem, describe what you did, expected, and saw; ask for a focused fix and retest. Ask it to replace the starter status in **SPEC.md → Work record** with actual checks and links to `game.py` and `tests/test_game.py`, preserving your plan and issue. Do not claim checks nobody performed.
 
 ## 5. Keep the reviewed change
 
