@@ -50,4 +50,7 @@ Use `unit`, `integration`, and `e2e` pytest markers. Run `.venv/bin/python check
 - Test explanation: the literal rock/paper/lose case catches reversed winner rules or computer-perspective results. AI explained this example when the student was unsure; the student correctly predicted paper/rock/win afterward.
 - Actual student browser observation: scissors against computer paper displayed a player win; scissors cuts paper. Student confirmed independent replay and Tab/Enter controls worked.
 - Help: AI assisted with setup, implementation, tests, rule/test explanation, and this evidence record. The student supplied predictions and the actual browser observation.
-- GitHub delivery: issue creation was attempted but rejected with HTTP 403 (Resource not accessible by integration). Issue, PR, CI and merge evidence remain outstanding; no links or passing checks have been invented.
+- Issue: [RPS-001 #1](https://github.com/Khadija3005/is218-rps/issues/1).
+- Pull request: [RPS-001 #2](https://github.com/Khadija3005/is218-rps/pull/2), closes #1.
+- CI: [Python checks run](https://github.com/Khadija3005/is218-rps/actions/runs/41488568350). Confirm checks on the final PR commit before merging.
+- GitHub help: student created the issue and PR and pushed the branch because the connected integration denied writes.
