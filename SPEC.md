@@ -52,7 +52,7 @@ Use `unit`, `integration`, and `e2e` pytest markers. Run `.venv/bin/python check
 - Help: AI assisted with setup, implementation, tests, rule/test explanation, and this evidence record. The student supplied predictions and the actual browser observation.
 - Issue: [RPS-001 #1](https://github.com/Khadija3005/is218-rps/issues/1).
 - Pull request: [RPS-001 #2](https://github.com/Khadija3005/is218-rps/pull/2), closes #1.
-- CI: [Python checks run](https://github.com/Khadija3005/is218-rps/actions/runs/41488568350). Confirm checks on the final PR commit before merging.
+- CI: [Final PR Python checks](https://github.com/Khadija3005/is218-rps/actions/runs/41490323250) passed on final PR commit `67e75f6` before merging.
 - GitHub help: student created the issue and PR and pushed the branch because the connected integration denied writes.
 
 - Windows fixture fix: the supplied development-server fixture now stops its own process tree on Windows before closing stdout, preventing a reloader child from hanging cleanup. Assertions and shared check settings remain intact. Reviewed this additional test-fixture change.
