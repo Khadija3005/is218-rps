@@ -52,6 +52,15 @@ def fixture_launch_game(tmp_path, request):
                     break
             yield tmp_path, address.group(1), output
         finally:
+            if sys.platform == "win32":
+                # Werkzeug's reloader child inherits stdout. Stop this fixture's
+                # entire tree before Popen closes the pipe read by our thread.
+                subprocess.run(
+                    ["taskkill", "/PID", str(process.pid), "/T", "/F"],
+                    check=False,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
             process.terminate()
             try:
                 process.wait(timeout=10)
