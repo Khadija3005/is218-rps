@@ -27,7 +27,7 @@ Results are from the **player’s perspective**. `determine_winner(player, compu
 
 ### Agreed plan
 
-Before implementation, predict one matchup and explain it with your local coding agent. Discuss a short plan and checks. Once it makes sense, ask the agent to replace this paragraph with the agreed plan, preserving the expected results above. Continue in the same chat.
+Agreed with the student: rock against paper loses; paper covers rock (explanation supplied with AI help). Implement all nine player-perspective outcomes with the supplied interface/server. Each choice starts an independent round. Test all nine literal outcomes, a real HTTP result, and a Chromium round/replay; fix only randomness. Reuse HTTP 400 missing/unsupported-input checks, including lizard. No scoring, storage, accounts, new framework, or AI API.
 
 ### Checks
 
@@ -44,7 +44,10 @@ Use `unit`, `integration`, and `e2e` pytest markers. Run `.venv/bin/python check
 
 ### Work record
 
-- Issue: add your own issue URL.
-- Pull request / CI: add actual URLs when they exist.
-- Implementation: **Not implemented.** The shell is supplied; `game.py` is unfinished.
-- Checks: **Rules not verified.** Supplied request/browser tests cover the shell only. After implementation, record actual full-check results and your browser observations here; put detailed results in the PR. Passing formatting and analysis alone is not evidence of correct rules.
+- Implementation: [game.py](game.py), [unit and request tests](tests/test_game.py), [Chromium round/replay test](tests/e2e/test_round.py).
+- Local checks: Python 3.12.6 in this clone's .venv. Non-browser pytest: 23 passed, 6 deselected. New Chromium round/replay test: 1 passed. Pylint passed for all three changed Python files. Individual Black formatting completed. Full check.py was attempted but Black multiprocessing failed/hung in the Windows sandbox; full-suite success is not claimed.
+- Review: compared game.py and both new test files against all nine expected outcomes and the agreed scope. Positive tests patch only computer randomness. Supplied server, interface, configuration, and negative assertions are unchanged.
+- Test explanation: the literal rock/paper/lose case catches reversed winner rules or computer-perspective results. AI explained this example when the student was unsure; the student correctly predicted paper/rock/win afterward.
+- Actual student browser observation: scissors against computer paper displayed a player win; scissors cuts paper. Student confirmed independent replay and Tab/Enter controls worked.
+- Help: AI assisted with setup, implementation, tests, rule/test explanation, and this evidence record. The student supplied predictions and the actual browser observation.
+- GitHub delivery: issue creation was attempted but rejected with HTTP 403 (Resource not accessible by integration). Issue, PR, CI and merge evidence remain outstanding; no links or passing checks have been invented.
