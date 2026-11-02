@@ -27,7 +27,7 @@ Results are from the **player’s perspective**. `determine_winner(player, compu
 
 ### Agreed plan
 
-Before implementation, predict one matchup and explain it with your local coding agent. Discuss a short plan and checks. Once it makes sense, ask the agent to replace this paragraph with the agreed plan, preserving the expected results above. Continue in the same chat.
+Agreed with the student: rock against paper loses; paper covers rock (explanation supplied with AI help). Implement all nine player-perspective outcomes with the supplied interface/server. Each choice starts an independent round. Test all nine literal outcomes, a real HTTP result, and a Chromium round/replay; fix only randomness. Reuse HTTP 400 missing/unsupported-input checks, including lizard. No scoring, storage, accounts, new framework, or AI API.
 
 ### Checks
 
@@ -44,7 +44,15 @@ Use `unit`, `integration`, and `e2e` pytest markers. Run `.venv/bin/python check
 
 ### Work record
 
-- Issue: add your own issue URL.
-- Pull request / CI: add actual URLs when they exist.
-- Implementation: **Not implemented.** The shell is supplied; `game.py` is unfinished.
-- Checks: **Rules not verified.** Supplied request/browser tests cover the shell only. After implementation, record actual full-check results and your browser observations here; put detailed results in the PR. Passing formatting and analysis alone is not evidence of correct rules.
+- Implementation: [game.py](game.py), [unit and request tests](tests/test_game.py), [Chromium round/replay test](tests/e2e/test_round.py).
+- Full local checks: student ran `.venv\Scripts\python.exe check.py` in PowerShell with Python 3.12.6 after the Windows fixture cleanup fix. Black: 11 files unchanged, PASS. Pylint: PASS. Non-browser pytest: 23 passed, 6 deselected (0.16s). Chromium: 6 passed, 23 deselected (14.99s). All configured checks passed. Earlier sandbox/cleanup failures were resolved or bypassed by running in the student's regular terminal.
+- Review: compared game.py and both new test files against all nine expected outcomes and the agreed scope. Positive tests patch only computer randomness. Supplied server, interface, configuration, and negative assertions are unchanged.
+- Test explanation: the literal rock/paper/lose case catches reversed winner rules or computer-perspective results. AI explained this example when the student was unsure; the student correctly predicted paper/rock/win afterward.
+- Actual student browser observation: scissors against computer paper displayed a player win; scissors cuts paper. Student confirmed independent replay and Tab/Enter controls worked.
+- Help: AI assisted with setup, implementation, tests, rule/test explanation, and this evidence record. The student supplied predictions and the actual browser observation.
+- Issue: [RPS-001 #1](https://github.com/Khadija3005/is218-rps/issues/1).
+- Pull request: [RPS-001 #2](https://github.com/Khadija3005/is218-rps/pull/2), closes #1.
+- CI: [Python checks run](https://github.com/Khadija3005/is218-rps/actions/runs/41488568350). Confirm checks on the final PR commit before merging.
+- GitHub help: student created the issue and PR and pushed the branch because the connected integration denied writes.
+
+- Windows fixture fix: the supplied development-server fixture now stops its own process tree on Windows before closing stdout, preventing a reloader child from hanging cleanup. Assertions and shared check settings remain intact. Reviewed this additional test-fixture change.
